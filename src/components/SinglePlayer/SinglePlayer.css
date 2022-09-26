@@ -1,0 +1,39 @@
+.SinglePlayer{
+padding: 10px;
+/* border: 1px solid gray; */
+margin: 5px;
+}
+.player-img{
+    width:100%;
+    margin: 0 auto;
+}
+.player-photo{
+    width: 250px;
+    text-align: center ;
+}
+.card{
+    width:250px;
+    height:470px;
+    box-shadow: 2px 2px 5px gray;
+}
+.player-btn{
+    padding: 10px 20px;
+    background-color: blue;
+    margin: 5px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+.cart-details-container{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid gray;
+    margin: 1px;
+}
+.delete-btn{
+    padding: 1px 6px;
+    background-color:red;
+    color: white;
+}

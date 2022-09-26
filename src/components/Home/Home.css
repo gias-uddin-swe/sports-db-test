@@ -1,0 +1,20 @@
+.cart{
+    border: 1px solid rgb(235, 229, 229);
+    box-shadow: 4px 4px 8px gray;
+    width: 100%;
+    border-radius:5px;
+    /* position: fixed; */
+    /* position: relative;
+    overflow: scroll;
+    height:100vh; */
+
+  
+}
+
+.right-side{
+/* position: -webkit-sticky; */
+ /* position: fixed;
+ top: 20;
+ right: 0; */
+ margin-top: 10px;
+}
