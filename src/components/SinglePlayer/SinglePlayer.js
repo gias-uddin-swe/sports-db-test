@@ -110,7 +110,7 @@ const SinglePlayer = ({ info, cart, setCart }) => {
     }
   };
   return (
-    <div className="SinglePlayer">
+    <div className="SinglePlayer" data-aos="zoom-in">
       <div className="card">
         <div className="player-img">
           <img className="player-photo" src={strThumb} alt="" />
