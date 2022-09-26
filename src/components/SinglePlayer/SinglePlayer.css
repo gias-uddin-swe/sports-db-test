@@ -37,3 +37,13 @@ margin: 5px;
     background-color:red;
     color: white;
 }
+.bookmark-btn{
+    padding: 6px 10px;
+    background-color:red;
+    border: none;
+    border-radius: 3px;
+    color:white;
+}
+.bookmarked-btn{
+    background-color:gray;
+}

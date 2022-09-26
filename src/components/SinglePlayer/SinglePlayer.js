@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SinglePlayer.css";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 const SinglePlayer = ({ info, cart, setCart }) => {
+  const [isBookmark, setIsBookmark] = useState(null);
+  const [control, setControl] = useState(false);
+
   const {
     strPlayer,
     idPlayer,
@@ -11,6 +14,25 @@ const SinglePlayer = ({ info, cart, setCart }) => {
     strGender,
     strThumb,
   } = info || {};
+
+  useEffect(() => {
+    console.log("hello");
+    const getBookmark = localStorage.getItem("bookmark");
+    const myBookmark = JSON.parse(getBookmark);
+    const isExist = myBookmark?.find((p) => p?.idPlayer === idPlayer);
+    if (isExist) {
+      setIsBookmark(true);
+    }
+  }, [info, control]);
+
+  const handleRemoveBookmarked = () => {
+    setControl(!control);
+    const getBookmark = localStorage.getItem("bookmark");
+    const myBookmark = JSON.parse(getBookmark);
+    const isExist = myBookmark?.filter((p) => p?.idPlayer !== idPlayer);
+    localStorage.setItem("bookmark", JSON.stringify(isExist));
+    setControl(!control);
+  };
   const handleAddToCart = () => {
     var result = cart?.reduce(function (acc, obj) {
       const prev = parseFloat(acc);
@@ -50,6 +72,43 @@ const SinglePlayer = ({ info, cart, setCart }) => {
       Swal.fire("Good job!", "You clicked the button!", "success");
     }
   };
+
+  console.log(control);
+  const handleBookmark = () => {
+    let bookmark = [];
+    const info = {
+      strPlayer,
+      idPlayer,
+      strNationality,
+      strDescriptionEN,
+      strGender,
+      strThumb,
+      bookmark: "true",
+    };
+    const getBookmark = localStorage.getItem("bookmark");
+    const myBookmark = JSON.parse(getBookmark);
+    if (myBookmark) {
+      const isExistBookmarked = myBookmark?.find(
+        (p) => p.idPlayer === idPlayer
+      );
+      setControl(!control);
+      if (isExistBookmarked) {
+        alert("this player alrady bookamrk");
+      } else {
+        bookmark.push(info);
+        const newBookmark = [...myBookmark, info];
+
+        localStorage.setItem("bookmark", JSON.stringify(newBookmark));
+        setControl(!control);
+        console.log(newBookmark);
+      }
+    } else {
+      bookmark.push(info);
+      const readyToBookmark = JSON.stringify(bookmark);
+      localStorage.setItem("bookmark", readyToBookmark);
+      setControl(!control);
+    }
+  };
   return (
     <div className="SinglePlayer">
       <div className="card">
@@ -68,6 +127,18 @@ const SinglePlayer = ({ info, cart, setCart }) => {
           <button onClick={handleAddToCart} className="player-btn">
             Add to Team
           </button>
+          {isBookmark ? (
+            <button
+              onClick={handleRemoveBookmarked}
+              className="bookmarked-btn bookmark-btn"
+            >
+              Bookmarked
+            </button>
+          ) : (
+            <button onClick={handleBookmark} className="bookmark-btn">
+              Bookmark
+            </button>
+          )}
         </div>
       </div>
     </div>
